@@ -9,6 +9,9 @@ public class Professor extends Pessoa {
     @Column(name = "MATRICULA")
     private String matricula;
 
+    public Professor() {
+        super();
+    }
     public Professor(Long i, String nome) {
         super(i, nome);
     }

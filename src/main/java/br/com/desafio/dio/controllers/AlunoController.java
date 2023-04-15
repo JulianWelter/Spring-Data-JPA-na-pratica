@@ -2,6 +2,7 @@ package br.com.desafio.dio.controllers;
 
 import br.com.desafio.dio.repositories.AlunoRepository;
 import br.com.desafio.dio.models.Aluno;
+import br.com.desafio.dio.services.PessoaFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("aluno")
 public class AlunoController {
 
+    @Autowired
+    private PessoaFactory pessoaFactory;
+
     private final AlunoRepository alunoRepository;
 
     @Autowired
@@ -21,7 +25,7 @@ public class AlunoController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Aluno aluno) {
-        return new ResponseEntity<>(alunoRepository.save(aluno), HttpStatus.OK);
+        return new ResponseEntity<>(pessoaFactory.criarAluno(aluno.getNome(), aluno.getRa(), aluno.getCurso()), HttpStatus.OK);
     }
 
     @GetMapping
